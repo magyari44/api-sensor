@@ -1,0 +1,14 @@
+{
+  "domain": "api-sensor",
+  "name": "Api-sensor",
+  "dependencies": [],
+  "config_flow": true,
+  "codeowners": [
+    "@magyarin"
+  ],
+  "requirements": [
+    "sampleclient",
+    "integrationhelper"
+  ],
+  "homeassistant": "0.97.3"
+}
