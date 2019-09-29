@@ -1,31 +1,31 @@
-"""Constants for blueprint."""
+"""Constants for api-sensor."""
 # Base component constants
-DOMAIN = "blueprint"
+from datetime import timedelta
+DOMAIN = "api-sensor"
 DOMAIN_DATA = f"{DOMAIN}_data"
 VERSION = "0.0.1"
-PLATFORMS = ["binary_sensor", "sensor", "switch"]
+PLATFORMS = [ "sensor"]
 REQUIRED_FILES = [
     ".translations/en.json",
-    "binary_sensor.py",
     "const.py",
     "config_flow.py",
     "manifest.json",
     "sensor.py",
-    "switch.py",
 ]
-ISSUE_URL = "https://github.com/custom-components/blueprint/issues"
-ATTRIBUTION = "Data from this is provided by blueprint."
+
+SENSOR_URL = "http://192.168.2.173:32768/api/v1/scenario"
+ISSUE_URL = "TODO"
+ATTRIBUTION = "Data from this is provided by ApiSensor."
+SCAN_INTERVAL = timedelta(seconds=10)
 
 # Icons
-ICON = "mdi:format-quote-close"
+ICON = "mdi:home-climate-outline"
 
 # Device classes
 BINARY_SENSOR_DEVICE_CLASS = "connectivity"
 
 # Configuration
-CONF_BINARY_SENSOR = "binary_sensor"
 CONF_SENSOR = "sensor"
-CONF_SWITCH = "switch"
 CONF_ENABLED = "enabled"
 CONF_NAME = "name"
 CONF_USERNAME = "username"

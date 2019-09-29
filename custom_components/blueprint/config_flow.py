@@ -1,4 +1,4 @@
-"""Adds config flow for Blueprint."""
+"""Adds config flow for ApiSensor."""
 from collections import OrderedDict
 
 import voluptuous as vol
@@ -9,8 +9,8 @@ from .const import DOMAIN
 
 
 @config_entries.HANDLERS.register(DOMAIN)
-class BlueprintFlowHandler(config_entries.ConfigFlow):
-    """Config flow for Blueprint."""
+class ApiSensorFlowHandler(config_entries.ConfigFlow):
+    """Config flow for ApiSensor."""
 
     VERSION = 1
     CONNECTION_CLASS = config_entries.CONN_CLASS_CLOUD_POLL

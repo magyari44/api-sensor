@@ -1,8 +1,8 @@
 """
-Component to integrate with blueprint.
+Component to integrate with Api-sensor.
 
 For more details about this component, please refer to
-https://github.com/custom-components/blueprint
+TODO
 """
 import os
 from datetime import timedelta
@@ -17,12 +17,10 @@ from sampleclient.client import Client
 from integrationhelper.const import CC_STARTUP_VERSION
 
 from .const import (
-    CONF_BINARY_SENSOR,
     CONF_ENABLED,
     CONF_NAME,
     CONF_PASSWORD,
     CONF_SENSOR,
-    CONF_SWITCH,
     CONF_USERNAME,
     DEFAULT_NAME,
     DOMAIN_DATA,
@@ -64,11 +62,7 @@ CONFIG_SCHEMA = vol.Schema(
             {
                 vol.Optional(CONF_USERNAME): cv.string,
                 vol.Optional(CONF_PASSWORD): cv.string,
-                vol.Optional(CONF_BINARY_SENSOR): vol.All(
-                    cv.ensure_list, [BINARY_SENSOR_SCHEMA]
-                ),
                 vol.Optional(CONF_SENSOR): vol.All(cv.ensure_list, [SENSOR_SCHEMA]),
-                vol.Optional(CONF_SWITCH): vol.All(cv.ensure_list, [SWITCH_SCHEMA]),
             }
         )
     },
@@ -101,7 +95,7 @@ async def async_setup(hass, config):
 
     # Configure the client.
     client = Client(username, password)
-    hass.data[DOMAIN_DATA]["client"] = BlueprintData(hass, client)
+    hass.data[DOMAIN_DATA]["client"] = ApiSensorData(hass, client)
 
     # Load platforms
     for platform in PLATFORMS:
@@ -161,27 +155,17 @@ async def async_setup_entry(hass, config_entry):
 
     # Configure the client.
     client = Client(username, password)
-    hass.data[DOMAIN_DATA]["client"] = BlueprintData(hass, client)
-
-    # Add binary_sensor
-    hass.async_add_job(
-        hass.config_entries.async_forward_entry_setup(config_entry, "binary_sensor")
-    )
+    hass.data[DOMAIN_DATA]["client"] = ApiSensorData(hass, client)
 
     # Add sensor
     hass.async_add_job(
         hass.config_entries.async_forward_entry_setup(config_entry, "sensor")
     )
 
-    # Add switch
-    hass.async_add_job(
-        hass.config_entries.async_forward_entry_setup(config_entry, "switch")
-    )
-
     return True
 
 
-class BlueprintData:
+class ApiSensorData:
     """This class handle communication and stores the data."""
 
     def __init__(self, hass, client):
@@ -226,19 +210,19 @@ async def async_remove_entry(hass, config_entry):
             config_entry, "binary_sensor"
         )
         _LOGGER.info(
-            "Successfully removed binary_sensor from the blueprint integration"
+            "Successfully removed binary_sensor from the ApiSensorData integration"
         )
     except ValueError:
         pass
 
     try:
         await hass.config_entries.async_forward_entry_unload(config_entry, "sensor")
-        _LOGGER.info("Successfully removed sensor from the blueprint integration")
+        _LOGGER.info("Successfully removed sensor from the ApiSensorData integration")
     except ValueError:
         pass
 
     try:
         await hass.config_entries.async_forward_entry_unload(config_entry, "switch")
-        _LOGGER.info("Successfully removed switch from the blueprint integration")
+        _LOGGER.info("Successfully removed switch from the ApiSensorData integration")
     except ValueError:
         pass
