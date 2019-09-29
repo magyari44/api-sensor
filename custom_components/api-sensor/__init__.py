@@ -35,21 +35,8 @@ MIN_TIME_BETWEEN_UPDATES = timedelta(seconds=30)
 
 _LOGGER = logging.getLogger(__name__)
 
-BINARY_SENSOR_SCHEMA = vol.Schema(
-    {
-        vol.Optional(CONF_ENABLED, default=True): cv.boolean,
-        vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
-    }
-)
 
 SENSOR_SCHEMA = vol.Schema(
-    {
-        vol.Optional(CONF_ENABLED, default=True): cv.boolean,
-        vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
-    }
-)
-
-SWITCH_SCHEMA = vol.Schema(
     {
         vol.Optional(CONF_ENABLED, default=True): cv.boolean,
         vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
@@ -206,23 +193,7 @@ async def check_files(hass):
 async def async_remove_entry(hass, config_entry):
     """Handle removal of an entry."""
     try:
-        await hass.config_entries.async_forward_entry_unload(
-            config_entry, "binary_sensor"
-        )
-        _LOGGER.info(
-            "Successfully removed binary_sensor from the ApiSensorData integration"
-        )
-    except ValueError:
-        pass
-
-    try:
         await hass.config_entries.async_forward_entry_unload(config_entry, "sensor")
         _LOGGER.info("Successfully removed sensor from the ApiSensorData integration")
-    except ValueError:
-        pass
-
-    try:
-        await hass.config_entries.async_forward_entry_unload(config_entry, "switch")
-        _LOGGER.info("Successfully removed switch from the ApiSensorData integration")
     except ValueError:
         pass

@@ -13,16 +13,13 @@ REQUIRED_FILES = [
     "sensor.py",
 ]
 
-SENSOR_URL = "http://192.168.2.173:32768/api/v1/scenario"
+SENSOR_URL = "http://192.168.2.173:5000/"
 ISSUE_URL = "TODO"
 ATTRIBUTION = "Data from this is provided by ApiSensor."
 SCAN_INTERVAL = timedelta(seconds=10)
 
 # Icons
 ICON = "mdi:home-climate-outline"
-
-# Device classes
-BINARY_SENSOR_DEVICE_CLASS = "connectivity"
 
 # Configuration
 CONF_SENSOR = "sensor"
