@@ -55,13 +55,7 @@ custom_components/api-sensor/sensor.py
 api-sensor:
   username: my_username
   password: my_password
-  binary_sensor:
-    - enabled: true
-      name: My custom name
   sensor:
-    - enabled: true
-      name: My custom name
-  switch:
     - enabled: true
       name: My custom name
 ```
