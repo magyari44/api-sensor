@@ -38,7 +38,7 @@ class ApiSensor(Entity):
         apisensor = await self.webclient.async_get_json(
             SENSOR_URL, {"Accept": "application/json"}
         )
-        self._state = apisensor.msg
+        self._state = apisensor["msg"]
 
         # Send update "signal" to the component
         # await self.hass.data[DOMAIN_DATA]["client"].update_data()
